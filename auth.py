@@ -14,7 +14,28 @@ url_names = Url_Name()
 
 bp = Blueprint("auth", __name__)
 
-@bp.route('/register', methods=(constants.GET, constants.POST))
+@bp.route('/', methods=[constants.GET])
+def index():
+    if request.method == constants.GET:
+        return render_template(urls.index_url, name=url_names.index)
+
+@bp.route('/register', methods=[constants.GET, constants.POST])
 def register():
     if request.method == constants.GET:
         return render_template(urls.register_url, name=url_names.register)
+
+@bp.route('/login', methods=[constants.GET, constants.POST])
+def login():
+    if request.method == constants.GET:
+        return render_template(urls.login_url, name=url_names.login)
+
+@bp.route('/logout', methods=[constants.GET, constants.POST])
+def logout():
+    if request.method == constants.GET:
+        return render_template(urls.login_url, name=url_names.logout)
+
+
+@bp.route('/update-password', methods=[constants.GET, constants.POST])
+def forgot_password():
+    if request.method == constants.GET:
+        return render_template(urls.login_url, name=url_names.forgot_password)
