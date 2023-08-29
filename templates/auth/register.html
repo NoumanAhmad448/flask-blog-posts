@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% from "form_errors.html" import render_errors %}
+
 {% block body %}
 
       <div class="col d-flex justify-content-center mt-sm-3 mt-md-5">
@@ -7,7 +9,8 @@
           <div class="text-center"> Registeration Form</div>
         </div>
         <div class="card-body">
-          <form method="post" action="">
+          <form method="post" action="{{url_for('auth.register')}}">
+            {{render_errors(form)}}
             <div class="form-group">
               <label for="email">Email address</label>
               <input  type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"

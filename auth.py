@@ -7,6 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from .constants import Constants
 from .urls import Urls
 from .url_name import Url_Name
+from .forms.registeration import RegistrationForm
 
 constants = Constants()
 urls = Urls()
@@ -22,7 +23,13 @@ def index():
 @bp.route('/register', methods=[constants.GET, constants.POST])
 def register():
     if request.method == constants.GET:
-        return render_template(urls.register_url, name=url_names.register)
+        return render_template(urls.register_url)
+    form = RegistrationForm(request.form)
+    print(form.validate())
+    if request.method == constants.POST and form.validate():
+        pass
+    else:
+        return render_template(urls.register_url, form=form)
 
 @bp.route('/login', methods=[constants.GET, constants.POST])
 def login():
