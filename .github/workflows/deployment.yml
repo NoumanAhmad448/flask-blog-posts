@@ -77,15 +77,15 @@ jobs:
           # git-ftp-args: "--all"
           exclude: |
             **/test-django3/**
-            **/.github/**
-            **/.git/**
+            .github/**
+            .git/**
             **/flask/**
 
 
-    #   - name: Running Scripts
-    #     uses: appleboy/ssh-action@master
-    #     with:
-    #       username: ${{secrets.SSH_USERNAME}}
-    #       host: ${{secrets.SERVER_IP}}
-    #       password: ${{ secrets.SSH_PASSWORD }}
-        #   script: "cd /home/usmansaleem234/public_html/test-django/blog_posts && chmod u+x ./server_deploy.sh && ./server_deploy.sh"
+      - name: Running Scripts
+        uses: appleboy/ssh-action@master
+        with:
+          username: ${{secrets.SSH_USERNAME}}
+          host: ${{secrets.SERVER_IP}}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: "cd /home/usmansaleem234/flask.lyskills.com && chmod u+x ./server_deploy.sh && ./server_deploy.sh"
