@@ -7,3 +7,7 @@ server_debug
 .env
 .env.live.txt
 server_deploy.sh
+
+routes/__pycache__
+routes/auths/__pycache__
+routes/forms/__pycache__
