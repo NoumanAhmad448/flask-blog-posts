@@ -6,3 +6,4 @@ server_debug
 
 .env
 .env.live.txt
+server_deploy.sh
