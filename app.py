@@ -1,6 +1,9 @@
 from flask import Flask
-from .routes import auth
 from os import environ
+if environ["FLASK_DEBUG"]:
+    from .routes import auth
+else:
+    from routes import auth
 from flask import g
 
 app = Flask(__name__)
