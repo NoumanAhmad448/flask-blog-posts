@@ -1,5 +1,5 @@
 from flask import Flask
-from . import auth
+from .routes import auth
 from os import environ
 from flask import g
 

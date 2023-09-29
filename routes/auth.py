@@ -4,9 +4,9 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from werkzeug.security import check_password_hash, generate_password_hash
-from .constants import Constants
-from .urls import Urls
-from .url_name import Url_Name
+from .auths.constants import Constants
+from .auths.urls import Urls
+from .auths.url_name import Url_Name
 from .forms.registeration import RegistrationForm
 
 constants = Constants()
