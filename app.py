@@ -1,14 +1,15 @@
 from flask import Flask
-from os import environ
-if environ["FLASK_DEBUG"]:
-    from .routes import auth
-else:
-    from routes import auth
+from dotenv import load_dotenv
+import os
+from .routes import auth
 from flask import g
+
+load_dotenv()
+environ = os.environ
 
 app = Flask(__name__)
 app.register_blueprint(auth.bp)
 
 def create_app():
-    g.debug = environ["FLASK_DEBUG"] if "FLASK_DEBUG" in environ else False
+    g.debug = environ.get("FLASK_DEBUG")
     return app
