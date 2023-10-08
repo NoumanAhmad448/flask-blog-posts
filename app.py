@@ -1,15 +1,32 @@
-from flask import Flask
-from dotenv import load_dotenv
-import os
+from flask import Flask,request
+from flask_migrate import Migrate
 from .routes import auth
 from flask import g
-
-load_dotenv()
-environ = os.environ
+from .models.models import db
+from flask_babel import Babel
+from .settings import config
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] =  config['SECRET_KEY']
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+app.config['BABEL_DEFAULT_LOCALE'] = config["DEFAULT_LOCALE"]
+
+def get_locale():
+    lang = request.args.get('lang','en')
+    if not lang in config["AVAILABLE_LOCALE"]:
+        lang = config["DEFAULT_LOCALE"]
+    request.accept_languages.best_match(config["AVAILABLE_LOCALE"])
+    return lang
+
+babel = Babel(app,locale_selector=get_locale)
+
+db.init_app(app)
+migrate = Migrate(app, db)
+# register the route here
 app.register_blueprint(auth.bp)
 
 def create_app():
-    g.debug = environ.get("FLASK_DEBUG")
+    g.debug = config["DEBUG"]
     return app
+

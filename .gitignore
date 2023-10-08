@@ -11,3 +11,4 @@ server_deploy.sh
 routes/__pycache__
 routes/auths/__pycache__
 routes/forms/__pycache__
+flask
