@@ -38,3 +38,8 @@ flask db migrate -m "Initial migration."
 ```
 flask db upgrade
 ```
+
+## minify css and js
+```
+css-html-js-minify.py static/
+```

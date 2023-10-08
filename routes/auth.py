@@ -5,7 +5,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from .auths.constants import Constants
 from .auths.urls import Urls
 from .auths.url_name import Url_Name
-from .forms.registeration import RegistrationForm,LoginForm
+from .forms.registeration import RegistrationForm,LoginForm,UpdatePassForm
 from  ..models.models import User,db
 from flask_babel import gettext
 from ..settings import config
@@ -82,18 +82,12 @@ def login():
             return render_template(urls.login_url, form=form)
 
         if not check_password_hash(user.password,form.password.data):
-            flash(gettext(u"Password is wrong"))
+            flash(gettext(u"Password is wrong"),category="errors")
             return render_template(urls.login_url, form=form)
 
         login_user(user, remember=True)
-        return redirect(url_for('auth.login'))
-        # try:
-        #     # user_ob = User(email=user.email, is_active=user.is_active, first_name=user.first_name, last_name=user.last_name,
-        #     #                id=user.id)
-        # except:
-        #     if config["DEBUG"]:
-        #         print("something went wrong")
-        #     return redirect(url_for('auth.login'))
+        flash(gettext(u"You are logged in"),category="info")
+        return redirect(url_for('auth.index'))
 
     else:
         if config["DEBUG"]:
@@ -102,7 +96,7 @@ def login():
 
 
 @bp.route('/logout', methods=[constants.GET, constants.POST])
-# @login_required
+@login_required
 def logout():
     logout_user()
     return render_template(urls.login_url, name=url_names.logout)
@@ -111,4 +105,25 @@ def logout():
 @bp.route('/update-password', methods=[constants.GET, constants.POST])
 def forgot_password():
     if request.method == constants.GET:
-        return render_template(urls.login_url, name=url_names.forgot_password)
+        print(config["DEBUG"])
+        return render_template(urls.forgot_url, name=url_names.forgot_password,config=config)
+    form = UpdatePassForm(request.form)
+
+    if request.method == constants.POST and form.validate():
+        user = current_user
+
+        if not check_password_hash(user.password,form.password.data):
+            flash(gettext(u"Old Password is wrong"),category="errors")
+            return render_template(urls.forgot_url, form=form)
+        user.password = generate_password_hash(form.c_password.data)
+        db.session.commit()
+
+        if not form.should_login.data:
+            return redirect(url_for('auth.logout'))
+        flash(gettext(u"Password is updated"),category="info")
+        return redirect(url_for('auth.forgot_password'))
+
+    else:
+        if config["DEBUG"]:
+            print(form.errors)
+        return render_template(urls.forgot_url, form=form,config=config)

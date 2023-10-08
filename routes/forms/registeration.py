@@ -7,6 +7,15 @@ class LoginForm(Form):
     password = PasswordField('Password', [
         validators.DataRequired(),validators.Length(min=8,message="password must be at least 8 digits")
     ])
+class UpdatePassForm(Form):
+    email = StringField('Email')
+    password = PasswordField('Password', [
+        validators.DataRequired(),validators.Length(min=8,message="password must be at least 8 digits")
+    ])
+    c_password = PasswordField('Password', [
+        validators.DataRequired(),validators.Length(min=8,message="new password must be at least 8 digits")
+    ])
+    should_login = BooleanField('Terms')
 
 class RegistrationForm(Form):
     def validate_first_name(form,field):

@@ -54,3 +54,12 @@
     border-radius: 30px;
     font-size: 1rem;
   }
+
+  a{
+    color: brown !important;
+  }
+
+  button:focus,a:focus, a:active,button:active{
+    color: brown !important;
+    background-color: white !important;
+  }
