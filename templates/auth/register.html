@@ -9,13 +9,9 @@
           <div class="text-center"> Registeration Form</div>
         </div>
         <div class="card-body">
-          {% if form and form.errors %}
-            <section class="text-danger border p-3 mb-3 error-msg">
-              {% for error in form.errors %}
-                <div> {{error }} -> {{ form.errors[error][0] }} </div>
-              {% endfor %}
-            </section>
-          {% endif %}
+
+          {% include "form_errors.html" %}
+
           <form method="post" action="{{url_for('auth.register')}}">
             <div class="form-group">
               <label for="email">Email address</label>

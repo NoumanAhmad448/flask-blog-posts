@@ -10,4 +10,5 @@ config = {
     "SECRET_KEY" : environ.get("SECRET_KEY"),
     "DEFAULT_LOCALE" : environ.get("DEFAULT_LOCALE"),
     "AVAILABLE_LOCALE" : json.loads(environ.get("AVAILABLE_LOCALE")),
+    "LOGIN_PATH" : environ.get("LOGIN_PATH"),
 }

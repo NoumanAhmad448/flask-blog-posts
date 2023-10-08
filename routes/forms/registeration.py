@@ -2,6 +2,12 @@ from wtforms import Form, BooleanField, StringField, PasswordField, validators,V
 from flask_babel import gettext
 from ...validation import validate_alph_space,validate_html
 
+class LoginForm(Form):
+    email = StringField('Email', [validators.Email(message="Email is not a valid")])
+    password = PasswordField('Password', [
+        validators.DataRequired(),validators.Length(min=8,message="password must be at least 8 digits")
+    ])
+
 class RegistrationForm(Form):
     def validate_first_name(form,field):
         if validate_alph_space(field.data):
