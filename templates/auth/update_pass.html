@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block script %}
+{% if config["DEBUG"] %}
+<script src="{{ url_for('static',filename='js/update_pass_url.js') }}"></script>
+{% else %}
+<script src="{{ url_for('static',filename='js/update_pass_url.min.js') }}"></script>
+{% endif %}
+{% endblock  %}
+
+{% block body %}
+
+<div class="col d-flex justify-content-center mt-sm-3 mt-md-5">
+    <div class="card">
+      <div class="card-header">
+        <div class="text-center"> Update Password</div>
+      </div>
+      <div class="card-body">
+        {% include "form_errors.html" %}
+        <form method="post" action="{{url_for('auth.forgot_password')}}">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input  type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
+            value="{% if current_user and current_user.email %}{{current_user.email}}{% endif %}" disabled
+             placeholder="Enter Email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else</small>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-container">
+              <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+              <i class="bi bi-eye-slash" id="togglePassword"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">New Password</label>
+            <div class="password-container">
+              <input type="password" class="form-control" name="c_password" id="c_password" placeholder="New Password">
+              <i class="bi bi-eye-slash" id="togglePassword01"></i>
+            </div>
+          </div>
+          <div class="form-group form-check">
+            <input  type="checkbox" class="form-check-input" id="should_login" name="should_login">
+            <label class="form-check-label" for="should_login">Stay Login ?</label>
+          </div>
+          <button type="submit" class="btn btn-primary"> Update Password </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock  %}

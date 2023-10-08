@@ -1,14 +1,23 @@
-{% macro render_errors(field) %}
-  {% if field.errors %}
-    <ul class="text-danger">
-    {% for error_field in field.errors %}
-      <li>{{ error_field }}</li>
-      <ul>
-        {% for err_msg in field.errors[error_field] %}
-            <li>{{ err_msg }}</li>
-        {% endfor %}
-      </ul>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endmacro %}
+{% if form and form.errors %}
+<section class="text-danger border p-3 mb-3 error-msg">
+  {% for error in form.errors %}
+  <div> {{error }} -> {{ form.errors[error][0] }} </div>
+  {% endfor %}
+</section>
+{% endif %}
+
+{% with messages = get_flashed_messages(category_filter="errors") %}
+{% if messages %}
+<div class="text-danger border p-3 mb-3 error-msg">
+  {{ messages[0] }}
+</div>
+{% endif %}
+{% endwith %}
+
+{% with messages = get_flashed_messages(category_filter="info") %}
+{% if messages %}
+<div class="text-success border p-3 mb-3 error-msg">
+  {{ messages[0] }}
+</div>
+{% endif %}
+{% endwith %}

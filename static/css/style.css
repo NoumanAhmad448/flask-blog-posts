@@ -18,3 +18,48 @@
   .btn_rounded, .btn{
     border-radius: 25px !important;
   }
+
+  .btn-primary,.btn-outline-primary{
+    color: brown !important;
+    background-color: white !important;
+    font-size: 1.1rem;
+    border-color: brown;
+  }
+  .btn-primary:hover,.btn-outline-primary:hover{
+    color:  white !important;
+    background-color: brown !important;
+    font-size: 1.1rem;
+    border-color: white;
+  }
+
+  .card-header{
+    font-size: 1.3rem;
+    color: brown !important;
+    background-color: white;
+    text-transform: capitalize;
+  }
+
+  input,.card{
+    border-radius: 14px !important;
+  }
+  .navbar-brand{
+    font-size: 1.4rem;
+    color: brown !important;
+    background-color: white;
+    border-radius: 30px;
+    padding: 10px;
+  }
+
+  .error-msg{
+    border-radius: 30px;
+    font-size: 1rem;
+  }
+
+  a{
+    color: brown !important;
+  }
+
+  button:focus,a:focus, a:active,button:active{
+    color: brown !important;
+    background-color: white !important;
+  }
