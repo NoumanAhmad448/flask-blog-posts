@@ -13,4 +13,3 @@ class User(db.Model,UserMixin):
     first_name = db.Column(db.String(1000))
     last_name = db.Column(db.String(1000))
     is_active = db.Column(db.Boolean)
-

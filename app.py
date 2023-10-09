@@ -45,3 +45,4 @@ def create_app():
     g.debug = config["DEBUG"]
     return app
 
+
