@@ -37,6 +37,10 @@ pybabel update -i messages.pot -d translations
 ```
 
 ### migrations
+run once
+```
+flask db init
+```
 ```
 flask db migrate -m "Initial migration."
 ```

@@ -13,3 +13,4 @@ routes/auths/__pycache__
 routes/forms/__pycache__
 flask
 
+instance/db.sqlite3
