@@ -18,6 +18,11 @@
 
 ## Deployment
 1. Please refer to [https://flask.lyskills.com](https://flask.lyskills.com) for website reference
+2. Do not work to create .env and instance/db.sqlite3 file and change permission
+```
+chown root .env
+chown root instance/db.sqlite3
+```
 2. All deployment is made using ```gunicorn & nginx```. You may refer to [this](https://github.com/NoumanAhmad448/django-blog-posts/blob/master/deployment.md)
 
 ## Commands
@@ -37,6 +42,10 @@ flask db migrate -m "Initial migration."
 ```
 ```
 flask db upgrade
+```
+
+```
+flask db revision --rev-id 215a43277d61
 ```
 
 ## minify css and js
